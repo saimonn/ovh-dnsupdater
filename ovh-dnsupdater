@@ -24,16 +24,16 @@ foreach ($argv as $arg) {
 
 if ($options['help']) {
 	echo <<<EOD
-Usage: 
+Usage:
   $programName [options]
 Options:
   --conf-file=<file>
 	Load the configuration from file <file> instead of /etc/ovh-dnsupdater
-  --dry-run    
+  --dry-run
 	Just show what would be done, without actually doing anything.
-  -h, --help   
+  -h, --help
 	Show this help message.
-  --nocache       
+  --nocache
 	Force downloading the list of already setup domains using the API.
 
 
@@ -46,8 +46,8 @@ $conf = parse_ini_file($options['conf-file'], true);
 $conf['paths']['setup_domains'] = $conf['paths']['data'] . '/domains';
 ini_set('soap.wsdl_cache_dir', $conf['paths']['data']);
 
-$updater = new DnsUpdater($conf['soapi']['url'], $conf['soapi']['nic'], $conf['soapi']['password'], 
-	$conf['server']['hostname'], $conf['server']['ip'], $conf['backup_dns']['hostname'], 
+$updater = new DnsUpdater($conf['soapi']['url'], $conf['soapi']['nic'], $conf['soapi']['password'],
+	$conf['server']['hostname'], $conf['server']['ip'], $conf['backup_dns']['hostname'],
 	$conf['backup_dns']['ip']);
 
 openlog($conf['syslog']['prefix'], LOG_CONS | LOG_PID, LOG_DAEMON);

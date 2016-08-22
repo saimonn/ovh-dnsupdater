@@ -5,7 +5,7 @@ password = SoapiPassword
 url      = https://www.ovh.com/soapi/soapi-re-1.7.wsdl
 
 [server]
-; You must use the ovh-recognized hostname (ie, the original name of the 
+; You must use the ovh-recognized hostname (ie, the original name of the
 ; server when ovh gave it to you)
 hostname = nsXXXX.ovh.net
 ip       = xxx.xxx.xxx.xxx
