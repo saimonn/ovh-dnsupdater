@@ -17,8 +17,8 @@ To install ovh-dnsupdater it is necessary to perform three basic steps:
 
 First of all, you should copy the required files into appropriate locations in your filesystem. You can change the routes displayed here so long as you update the configuration file accordingly.
 
-	cp etc/ovh-dnsupdater /etc/ovh-dnsupdater
-	chmod 640 /etc/ovh-dnsupdater
+	cp etc/ovh-dnsupdater.conf /etc/ovh-dnsupdater.conf
+	chmod 640 /etc/ovh-dnsupdater.conf
 	cp ovh-dnsupdater /usr/sbin/ovh-dnsupdater
 	chmod 755 /usr/sbin/ovh-dnsupdater
 	mkdir /var/lib/ovh-dnsupdater
@@ -26,7 +26,7 @@ First of all, you should copy the required files into appropriate locations in y
 
 ### Setup the utility ###
 
-The next step is to modify the configuration file to reflect your OVH's SOAPI credentials, and the details of your server. All these settings are found in the /etc/ovh-dnsupdater (or wherever you have put the configuration) file.
+The next step is to modify the configuration file to reflect your OVH's SOAPI credentials, and the details of your server. All these settings are found in the /etc/ovh-dnsupdater.conf (or wherever you have put the configuration) file.
 
 ### First run and cronjob setup ###
 
@@ -55,14 +55,10 @@ Alternatively, some systems allow you to define cronjob tasks by creating files 
 	Usage: 
 	  ./ovh-dnsupdater [options]
 	Options:
-	  --conf-file=<file>
-		Load the configuration from file <file> instead of /etc/ovh-dnsupdater
-	  --dry-run    
-		Just show what would be done, without actually doing anything.
-	  -h, --help   
-		Show this help message.
-	  --nocache       
-		Force downloading the list of already setup domains using the API.
+	  --conf-file=<file>  Load the configuration from file <file> instead of /etc/ovh-dnsupdater.conf
+	  --dry-run           Just show what would be done, without actually doing anything.
+	  -h, --help          Show this help message.
+	  --nocache           Force downloading the list of already setup domains using the API.
 
 ## How it works ##
 

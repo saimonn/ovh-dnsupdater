@@ -8,7 +8,7 @@ $options = array(
 	'h'         => FALSE,
 	'help'      => FALSE,
 	'dry-run'   => FALSE,
-	'conf-file' => '/etc/ovh-dnsupdater',
+	'conf-file' => '/etc/ovh-dnsupdater.conf',
 );
 foreach ($argv as $arg) {
 	$arg = trim($arg, '- ');
@@ -27,14 +27,10 @@ if ($options['help']) {
 Usage:
   $programName [options]
 Options:
-  --conf-file=<file>
-	Load the configuration from file <file> instead of /etc/ovh-dnsupdater
-  --dry-run
-	Just show what would be done, without actually doing anything.
-  -h, --help
-	Show this help message.
-  --nocache
-	Force downloading the list of already setup domains using the API.
+  --conf-file=<file>  Load the configuration from file <file> instead of /etc/ovh-dnsupdater.conf
+  --dry-run           Just show what would be done, without actually doing anything.
+  -h, --help          Show this help message.
+  --nocache           Force downloading the list of already setup domains using the API.
 
 
 EOD;
