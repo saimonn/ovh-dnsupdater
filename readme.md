@@ -30,20 +30,20 @@ The next step is to modify the configuration file to reflect your OVH's SOAPI cr
 
 ### First run and cronjob setup ###
 
-Next, you have to "hard" run the utility manually so that it catches all your already setup domains. It is recommended that you perform a dry run at this (the utility logs what would be done, but does nothing) to avoid breaking anything:
+Next, you have to "nocache" run the utility manually so that it catches all your already setup domains. It is recommended that you perform a dry run at this (the utility logs what would be done, but does nothing) to avoid breaking anything:
 
-	ovh-dnsupdater --hard --dry-run
+	ovh-dnsupdater --nocache --dry-run
 
 Inspect your /var/log/syslog to see what the script would do. If everything looks fine and there are changes, you can re-run the utility without the dry run option:
 
-	ovh-dnsupdater --hard
+	ovh-dnsupdater --nocache
 
-Finally, you should setup cron jobs to automate the execution of the utility. The recommended way is to setup a frequently-running (every 5mins or so) task *without* the "--hard" option (this avoids any soapi request unless changes are detected), with a way less frequent (daily) task running with the "--hard" option (that ensures our cached information is up to date with the ovh servers).
+Finally, you should setup cron jobs to automate the execution of the utility. The recommended way is to setup a frequently-running (every 5mins or so) task *without* the "--nocache" option (this avoids any soapi request unless changes are detected), with a way less frequent (daily) task running with the "--hard" option (that ensures our cached information is up to date with the ovh servers).
 
 The previous ideas can be easily specified in /etc/crontab by adding the following lines:
 
 	*/5	*	*	*	*  root /usr/sbin/ovh-dnsupdater
-	7	2	*	*	*  root /usr/sbin/ovh-dnsupdater --hard
+	7	2	*	*	*  root /usr/sbin/ovh-dnsupdater --nocache
 
 Alternatively, some systems allow you to define cronjob tasks by creating files inside the /etc/cron.d folder. If this is your case, then you can just copy the included sample file:
 
@@ -61,7 +61,7 @@ Alternatively, some systems allow you to define cronjob tasks by creating files 
 		Just show what would be done, without actually doing anything.
 	  -h, --help   
 		Show this help message.
-	  --hard       
+	  --nocache       
 		Force downloading the list of already setup domains using the API.
 
 ## How it works ##
@@ -73,7 +73,7 @@ Ovh-dnsupdater works by monitoring your bind's zone folder, and updating OVH's s
  3. Compute the difference between these lists
  4. Add/Remove domains so that both lists end up synchronized
 
-The first step may be done in two different ways, depending on if the "hard" option has been specified or not. When in "hard" mode, the list of domains that ovh knows about is fetched using the SOAPI. In contrast, when "hard" is not specified, the utility simply loads the list as cached by the last time it ran.
+The first step may be done in two different ways, depending on if the "nocache" option has been specified or not. When in "hard" mode, the list of domains that ovh knows about is fetched using the SOAPI. In contrast, when "hard" is not specified, the utility simply loads the list as cached by the last time it ran.
 
 ## To Do ##
 

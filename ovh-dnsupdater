@@ -4,7 +4,7 @@
 // Parse user-specified options
 $programName = array_shift($argv);
 $options = array(
-	'hard'      => FALSE,
+	'nocache'      => FALSE,
 	'h'         => FALSE,
 	'help'      => FALSE,
 	'dry-run'   => FALSE,
@@ -33,7 +33,7 @@ Options:
 	Just show what would be done, without actually doing anything.
   -h, --help   
 	Show this help message.
-  --hard       
+  --nocache       
 	Force downloading the list of already setup domains using the API.
 
 
@@ -58,7 +58,7 @@ if ($options['dry-run']) {
 }
 
 // Fetch the previous (old) list of domains already setup
-if ($options['hard']) {
+if ($options['nocache']) {
 	$old = $updater->getDomains();
 } else {
 	$old = array_map("trim", file($conf['paths']['setup_domains']));
